@@ -17,19 +17,27 @@ data.then((res) => { machines.value = res })
 
 
 
-const equipmentData: Equipment = {
-  serial_num: "40VMxxxx",
-  type: "",
-  available: false,
-  monthly_value: "",
-  rentalID: "",
-  yard: "",
-};
 </script>
 
 <template>
-  <div v-for="machine in machines">{{ machine.serial_num }}</div>
-  <div>{{ equipmentData.serial_num }}</div>
+  <div class="container">
+    <div class="" :key="machine.rentalID" v-for="machine in machines">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ machine.serial_num }}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">{{ machine.type }}</h6>
+          <p class="card-text">{{ machine.monthly_value }}</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
-<style></style>
+<style>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>

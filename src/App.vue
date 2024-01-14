@@ -8,7 +8,10 @@ import Nav from './components/Nav.vue'
 </script>
 
 <template>
-  <Nav></Nav>
+  <header>
+
+    <Nav></Nav>
+  </header>
   <RouterView />
 </template>
 
