@@ -1,16 +1,24 @@
-<script  async setup lang="ts">
-import type { Equipment } from "../models/equipment";
-import { ref } from 'vue'
+<script async  setup lang="ts">
+import type { Equipment } from '@/models/equipment';
+import { ref, onMounted } from 'vue';
+import { useEquipmentStore } from "../stores/equipment"
 
-
-
-import { useEquipmentStore } from "../../stores/equipment"
 const store = useEquipmentStore()
 
 const machines = ref()
 
-const data = store.getEquipment()
-data.then((res) => { machines.value = res })
+
+
+
+
+
+
+
+onMounted(() =>
+{
+  const data = store.getEquipment()
+  data.then((res: Equipment[]) => { machines.value = res })
+})
 
 
 
@@ -21,7 +29,7 @@ data.then((res) => { machines.value = res })
 
 <template>
   <div class="container">
-    <div class="" :key="machine.rentalID" v-for="machine in machines">
+    <div class="" :key="machine.serial_num" v-for="machine in machines">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{ machine.serial_num }}</h5>

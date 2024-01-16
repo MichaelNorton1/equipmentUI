@@ -1,12 +1,11 @@
 
 <script  setup lang="ts">
+import Rental from "../components/Rental.vue"
 
 
 </script>
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <Rental></Rental>
 </template>
 
 <style></style>
