@@ -6,10 +6,6 @@ import type { RentedUnits } from '@/models/rentedUnits'
 export const useEquipmentStore = defineStore('equipment', () => {
   const equipmentList = ref(null)
 
-  const checkList = computed(() => {
-    return equipmentList.value ? equipmentList : []
-  })
-
   const getEquipment = async () => {
     const data = await fetch('http://localhost:3001/api/equipment')
 
@@ -18,15 +14,14 @@ export const useEquipmentStore = defineStore('equipment', () => {
     equipmentList.value = values.result
   }
 
+  const rentalList = ref(null)
   const getRentals = async () => {
     const data = await fetch('http://localhost:3001/api/rentals')
 
     const values = await data.json()
 
-    const final: RentedUnits = values.result
-
-    return final
+    rentalList.value = values.result
   }
 
-  return { getEquipment, getRentals, equipmentList, checkList }
+  return { getEquipment, getRentals, equipmentList, rentalList }
 })

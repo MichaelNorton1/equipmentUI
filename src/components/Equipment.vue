@@ -6,22 +6,14 @@ import { useEquipmentStore } from "../stores/equipment"
 const store = useEquipmentStore()
 
 
-
-
-
-
-
-
-
-
-
+const equipment = computed(() => { return store.equipmentList ? store.equipmentList : [] })
 onMounted(() =>
 {
   store.getEquipment()
 
 })
 
-console.log(store.checkList)
+
 
 
 
@@ -30,7 +22,7 @@ console.log(store.checkList)
 
 <template>
   <div class="container">
-    <div class="" :key="machine.serial_num" v-for="machine in store.checkList.value">
+    <div class="" :key="machine.serial_num" v-for="machine in equipment">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{ machine.serial_num }}</h5>

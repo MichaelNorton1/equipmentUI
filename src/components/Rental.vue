@@ -1,20 +1,20 @@
 <script async  setup lang="ts">
 import type { RentedUnits } from '@/models/rentedUnits';
-import { inject, onMounted, ref } from 'vue';
+import { computed, inject, onMounted, ref } from 'vue';
 import { useEquipmentStore } from "../stores/equipment"
 
 const store = useEquipmentStore()
 
 
-const rentals = ref()
-console.log(rentals)
+const rentals = computed(() => { return !store.rentalList ? [] : store.rentalList })
+
 
 onMounted(() =>
 {
 
-    const data2 = store.getRentals()
+    store.getRentals()
 
-    data2.then((res: RentedUnits) => { rentals.value = res })
+
 })
 
 
