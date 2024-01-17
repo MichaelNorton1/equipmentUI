@@ -1,11 +1,12 @@
 <script async  setup lang="ts">
 import type { Equipment } from '@/models/equipment';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useEquipmentStore } from "../stores/equipment"
 
 const store = useEquipmentStore()
 
-const machines = ref()
+
+
 
 
 
@@ -16,11 +17,11 @@ const machines = ref()
 
 onMounted(() =>
 {
-  const data = store.getEquipment()
-  data.then((res: Equipment[]) => { machines.value = res })
+  store.getEquipment()
+
 })
 
-
+console.log(store.checkList)
 
 
 
@@ -29,7 +30,7 @@ onMounted(() =>
 
 <template>
   <div class="container">
-    <div class="" :key="machine.serial_num" v-for="machine in machines">
+    <div class="" :key="machine.serial_num" v-for="machine in store.checkList.value">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">{{ machine.serial_num }}</h5>
