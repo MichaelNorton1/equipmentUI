@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import AddEquipment from "@/components/AddEquipment.vue";
+import AddModalButton from "@/components/AddModalButton.vue";
 import Equipment from "../components/Equipment.vue";
+
+
 
 </script>
 
 <template>
   <main>
-    <AddEquipment></AddEquipment>
+    <AddModalButton></AddModalButton>
     <Equipment></Equipment>
   </main>
 </template>

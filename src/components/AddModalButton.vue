@@ -1,16 +1,19 @@
 <script async  setup lang="ts">
 
 
+import { useRoute } from 'vue-router';
 
 
 
+const route = useRoute()
 
+console.log(route.name)
 
 </script>
 
 <template>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Add Equipment
+        Add {{ $route.name }}
     </button>
 
     <!-- Modal -->
