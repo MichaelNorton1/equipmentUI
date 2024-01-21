@@ -1,19 +1,62 @@
-import { describe, it, expect } from 'vitest'
-import { setActivePinia, createPinia } from 'pinia'
-import { useEquipmentStore } from './Equipment'
-import { beforeEach } from 'vitest'
-import type { Equipment } from '../src/models/equipment'
+import { describe, it, expect, test } from 'vitest'
+import { vi } from 'vitest'
 
-describe('Equipment Store', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+import Equipment from '@/components/Equipment.vue'
 
-  it('it returns an array of equipment', async () => {
-    const equip = useEquipmentStore()
+import { mount } from '@vue/test-utils'
 
-    const final = await equip.getEquipment()
+import { createTestingPinia } from '@pinia/testing'
+import { useEquipmentStore } from './equipment'
 
-    expect(final).toHaveProperty('length')
+describe('Equipment Page', () => {
+  test('Shows cards with Equipment', () => {
+    const wrapper = mount(Equipment, {
+      global: {
+        plugins: [
+          createTestingPinia({
+            createSpy: vi.fn,
+            initialState: {
+              equipment: {
+                equipmentList: [
+                  {
+                    rentalID: 4,
+                    customerID: 'test',
+                    location: null,
+                    dateStart: null,
+                    dateEnd: null,
+                    notes: null,
+                    active: 0,
+                    customerName: 'Customer 1'
+                  },
+                  {
+                    rentalID: 5,
+                    customerID: 'custom',
+                    location: 'Tampa',
+                    dateStart: '2024-01-06T05:00:00.000Z',
+                    dateEnd: null,
+                    notes: 'custom',
+                    active: 1,
+                    customerName: 'Customer 2'
+                  },
+                  {
+                    rentalID: 7,
+                    customerID: 'custom',
+                    location: 'Tampa',
+                    dateStart: '2024-01-06T05:00:00.000Z',
+                    dateEnd: null,
+                    notes: 'custom',
+                    active: 0,
+                    customerName: 'Cusomter 4'
+                  }
+                ]
+              }
+            }
+          })
+        ]
+      }
+    })
+    const store = useEquipmentStore()
+
+    expect(store.equipmentList).toHaveLength(3)
   })
 })
