@@ -7,10 +7,14 @@ const submit = (e) =>
     const form = document.getElementById("equipmentForm")
 
     const data = new FormData(form)
+
+
     for (const [key, value] of data)
     {
-        console.log(`${key}: ${value}\n`);
+        /* console.log(`${key}: ${value}\n`); */
     }
+
+    console.log(data.entries())
 }
 
 </script>
