@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 
 import { computed, ref } from 'vue'
 import type { RentedUnits } from '@/models/rentedUnits'
+import type { Equipment } from '@/models/equipment'
 
 export const useEquipmentStore = defineStore('equipment', () => {
   const equipmentList = ref(null)
@@ -23,5 +24,20 @@ export const useEquipmentStore = defineStore('equipment', () => {
     rentalList.value = values.result
   }
 
-  return { getEquipment, getRentals, equipmentList, rentalList }
+  const addEquipment = async (equip: Equipment) => {
+    console.log(JSON.stringify(equip))
+    const data = await fetch('http://localhost:3001/api/equipment/add', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(equip)
+    })
+
+    const prom = await data.json()
+
+    console.log(prom)
+  }
+
+  return { getEquipment, getRentals, equipmentList, rentalList, addEquipment }
 })
