@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Equipment } from '@/models/equipment';
 import { useEquipmentStore } from "../stores/equipment"
+import { computed, inject } from 'vue';
 
 const store = useEquipmentStore()
 
@@ -37,14 +38,31 @@ const submit = (e: Event) =>
 
 }
 
+const props = defineProps(["update"])
+const check = computed(() =>
+{
+    if (props.update)
+    {
+        return "Hey"
+    }
+
+    return " hmm"
+
+})
+
+
+const machine = inject("machine")
+
 </script>
 
 <template>
     <div>
         <form id="equipmentForm">
+            {{ check }}
             <div class="form-group">
                 <label for="serialNumber">serial number</label>
-                <input name="serial_num" class="form-control" id="" placeholder="Serial Number">
+                <input :value="machine?.machine.serial_num" name="serial_num" class="form-control" id=""
+                    placeholder="Serial Number">
 
             </div>
             <div class="form-group">
